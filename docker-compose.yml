@@ -82,6 +82,19 @@ services:
             - '/dev/shm:/dev/shm'
         networks:
             - sail
+    phpmyadmin:
+        image: phpmyadmin/phpmyadmin
+        restart: always
+        ports:
+            - '8080:80'
+        networks:
+            - sail
+        links:
+            - mysql
+        environment:
+            PMA_USERNAME: '${DB_USERNAME}'
+            PMA_PASSWORD: '${DB_PASSWORD}'
+            PMA_HOST: mysql
 networks:
     sail:
         driver: bridge
